@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+<!-- Bootstrap core JavaScript-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Page level plugin JavaScript--><script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+<style>
+    /*
+td {
+    vertical-align: top;
+}
+#table1, #table2, #table3, #table4, #table5 {
+    display: none;
+}*/
+</style>
+
+</head>
+<body style="background-color: rgb(220, 220, 220);"> 
+<!--
+    <div>  
+        <a href="#" onclick="goBack()"> <i  class="fas fa-long-arrow-alt-left" style="font-size: 60px; float: left; overflow: auto; margin-left: 13%;"></i></a>
+
+<center><h1 style="margin-top: 3%; margin-bottom: 5%; margin-right: 13%;">Cadeia Restaurantes R&R</h1></center></div>
+
+<center>
+<a href="#" onclick='show(1);'><button type="button" class="btn btn-primary">Entradas</button></a>
+<a href="#" onclick='show(2);'><button type="button" class="btn btn-primary">Pratos de Carne</button></a>
+<a href="#" onclick='show(3);'><button type="button" class="btn btn-primary">Pratos de Peixe</button></a>
+<a href="#" onclick='show(4);'><button type="button" class="btn btn-primary">Bebidas</button></a>
+<a href="#" onclick='show(5);'><button type="button" class="btn btn-primary">Sobremesas</button></a>
+</center>
+
+
+<div class="row" style="margin: 3%;">
+	<div class="container">
+    	<table class="table table-bordered" id="table1" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entradas in dadosEntradas%}
+                <tr>
+                    <td>{{entradas.Items.designacao}}</td>
+                    <td>{{entradas.TiposItem.designacao}}</td>
+                    <td>{{entradas.Items.custo}}</td>
+                    <td><i class="far fa-trash-alt"></i></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="row" style="margin: 3%;">
+    <div class="container">
+        <table class="table table-bordered" id="table2" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carne in dadosCarne%}
+                <tr>
+                    <td>{{carne.Items.designacao}}</td>
+                    <td>{{carne.TiposItem.designacao}}</td>
+                    <td>{{carne.Items.custo}}</td>
+                    <td><i class="far fa-trash-alt"></i></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="row" style="margin: 3%;">
+        <div class="container">
+            <table class="table table-bordered" id="table3" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Preço</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for peixe in dadosPeixe%}
+                    <tr>
+                        <td>{{peixe.Items.designacao}}</td>
+                        <td>{{peixe.TiposItem.designacao}}</td>
+                        <td>{{peixe.Items.custo}}</td>
+                        <td><i class="far fa-trash-alt"></i></td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    
+    </div>
+
+<div class="row" style="margin: 3%;">
+	<div class="container">
+    	<table class="table table-bordered" id="table4" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bebidas in dadosBebidas%}
+                <tr>
+                    <td>{{bebidas.Items.designacao}}</td>
+                    <td>{{bebidas.TiposItem.designacao}}</td>
+                    <td>{{bebidas.Items.custo}}</td>
+                    <td><i class="far fa-trash-alt"></i></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="row" style="margin: 3%;">
+    <div class="container">
+        <table class="table table-bordered" id="table5" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sobremesas in dadosSobremesas %}
+                <tr>
+                    <td>{{sobremesas.Items.designacao}}</td>
+                    <td>{{sobremesas.TiposItem.designacao}}</td>
+                    <td>{{sobremesas.Items.custo}}</td>
+                    <td><i class="far fa-trash-alt"></i></td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+</div>-->
+<center><h1 style="margin-top: 3%; margin-bottom: 5%;">Cadeia Restaurantes R&R</h1></center>
+
+<div class="row" style="margin: 5%;">
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+        <a href="/itens_entradas">
+            <button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+            <div><i class="fas fa-bread-slice" style="font-size: 60px;"></i></div>
+            <div style="font-size: 40px;">Entradas</div>
+            </button>
+        </a>
+    </div>
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+            <a href="/itens_pratos_carne">
+                <button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+                <div><i class="fas fa-drumstick-bite" style="font-size: 60px;"></i></div>
+                <div style="font-size: 40px;">Pratos de Carne</div>
+                </button>
+            </a>
+     </div>
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+        <a href="/itens_pratos_peixe">
+            <button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+            <div><i class="fas fa-fish" style="font-size: 60px;"></i></div>
+            <div style="font-size: 40px;">Pratos de Peixe</div>
+            </button>
+        </a>
+    </div>
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+         <a href="/itens_bebidas">
+            <button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+            <div><i class="fas fa-wine-glass-alt" style="font-size: 60px;"></i></div>
+            <div style="font-size: 40px;">Bebidas</div>
+            </button>
+         </a>
+    </div>
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+        <a href="/itens_sobremesas">
+             <button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+             <div><i class="fas fa-ice-cream" style="font-size: 60px;"></i></div>
+             <div style="font-size: 40px;">Sobremesa</div>
+             </button>
+        </a>
+    </div>
+    <div class="col-lg-4 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+        <a href="/novo1">
+            <button class="btn btn-secondary " style="float: left; width: 100%; height: 100%;">
+            <div><i class="fas fa-arrow-left" style="font-size: 60px;"></i></div>
+            <div style="font-size: 40px;">Voltar</div>
+            </button>
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    /*
+    $(document).ready(function() {
+          $('#table1').DataTable();
+    });
+
+    $(document).ready(function() {
+          $('#table2').DataTable();
+    });
+
+    $(document).ready(function() {
+          $('#table3').DataTable();
+    });
+
+    $(document).ready(function() {
+          $('#table4').DataTable();
+    });
+
+    $(document).ready(function() {
+          $('#table5').DataTable();
+    });
+    */
+
+    function goBack() {
+      window.history.back();
+    }
+</script>
+<script>
+function show(nr) {
+    document.getElementById("table1").style.display="none";
+    document.getElementById("table2").style.display="none";
+    document.getElementById("table3").style.display="none";
+    document.getElementById("table4").style.display="none";
+    document.getElementById("table5").style.display="none";
+    document.getElementById("table"+nr).style.display="block";
+}
+
+</script>

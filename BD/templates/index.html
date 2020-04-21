@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+
+</head>
+<body style="background-color: rgb(220, 220, 220);"> 
+
+<center><h1 style="margin-top: 5%; margin-bottom: 5%; color: rgb(91,192,222);">Cadeia Restaurantes R&R</h1></center>
+<center><h3 style="margin-top: 3%; ">Bem-Vindo!</h3></center>
+<center><h5 style=" margin-bottom: 5%;">Por Favor escoha o seu Restaurante</h5></center>
+
+
+<form method="post" action="/novo">
+<center>
+<div class="input-group mb-3" style="margin-left: 5%; width: 80%;">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Localidade do Restaurante</label>
+    </div>
+    <select name="Escolha_Local" id="Escolha_Local" class="js-example-basic-single" name="state" style="width: 70%;">
+      {% for dado in dadosRestaurantes%}
+      <option value="{{dado.codigoloc}}">{{dado.designacao}}</option>
+      {%endfor%}
+    </select>
+  </div></center>
+ <br>
+  <center><div style="">
+    <button type="submit" class="btn btn-info">Escolher Restaurante</button>
+  </div></center>
+
+</form>
+
+</body>
+</html>

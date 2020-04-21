@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</head>
+<body style="background-color: rgb(220, 220, 220);"> 
+
+<center><h1 style="margin-top: 3%; margin-bottom: 3%;">Cadeia Restaurantes R&R</h1></center>
+<div class="row" style="margin: 5%;">
+  {%for tipos in tipos%}
+<div class="col-lg-3 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+  <a href="/novoprato/{{tipos.codigotipoement}}"><button class="btn btn-info " style="float: left; width: 100%; height: 100%;">
+      <div><i class="fas fa-plus" style="font-size: 60px;"></i></div>
+      <div style="font-size: 40px;">{{tipos.designacao}}</div>
+  </button></a>
+</div>
+
+{%endfor%}
+<div class="col-lg-3 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+  <a href="/editartipoementa"><button class="btn btn-info" style="float: left; width: 100%; height: 100%;">
+      <div><i class="far fa-edit" style="font-size: 60px;"></i></div>
+      <div style="font-size: 40px;">Editar Tipos</div>
+  </button></a>
+</div>
+<div class="col-lg-3 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+  <a href="/ementa"><button class="btn btn-secondary" style="float: left; width: 100%; height: 100%;">
+      <div><i class="fas fa-arrow-left" style="font-size: 60px;"></i></div>
+      <div style="font-size: 40px;">Voltar</div>
+  </button></a>
+</div>
+</div>
+</body>
+</html>

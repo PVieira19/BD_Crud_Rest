@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+
+</head>
+
+<body style="background-color: rgb(220, 220, 220);">
+    <div>
+        <center>
+            <h1 style="margin-top: 3%; margin-bottom: 5%;">Cadeia Restaurantes R&R</h1>
+
+            <div class="row">
+                {% for data in dadostabela %}
+
+                <div class="card" style="width: 18rem; margin: 15px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dia: {{data.Consumo.data}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Funcionario: {{data.Funcionarios.nome}}</h6>
+                        <p class="card-text">
+                            <u>Entradas:</u>
+                            {% for ementas1 in dadosEntradas %}
+
+                            {%if data.Consumo.codigoconsumo == ementas1.ConsumoItems.codigoconsumo and ementas1.ConsumoItems.estado==0%}
+                            {{ementas1.Items.designacao}}
+                            x{{ementas1.ConsumoItems.quantidade}};
+
+                            {%endif%}
+                            {%endfor%}
+                            <br>
+                            <u>Prato de Carne:</u>
+                            {% for ementas2 in dadosCarne %}
+
+                            {%if data.Consumo.codigoconsumo == ementas2.ConsumoItems.codigoconsumo and ementas2.ConsumoItems.estado==0 %}
+                            {{ementas2.Items.designacao}}
+                            x{{ementas2.ConsumoItems.quantidade}};
+
+                            {%endif%}
+                            {%endfor%}
+                            <br>
+                            <u>Prato de Peixe:</u>
+                            {% for ementas3 in dadosPeixe %}
+
+                            {%if data.Consumo.codigoconsumo == ementas3.ConsumoItems.codigoconsumo and ementas3.ConsumoItems.estado==0 %}
+                            {{ementas3.Items.designacao}}
+                            x{{ementas3.ConsumoItems.quantidade}};
+
+                            {%endif%}
+                            {%endfor%}
+                            <br>
+                            <u>Bebidas:</u><br>
+                            {% for ementas4 in dadosBebidas %}
+
+                            {%if data.Consumo.codigoconsumo == ementas4.ConsumoItems.codigoconsumo and ementas4.ConsumoItems.estado==0 %}
+                            {{ementas4.Items.designacao}}
+                            x{{ementas4.ConsumoItems.quantidade}};
+
+                            {%endif%}
+                            {%endfor%}
+                            <br>
+                            <u>Sobremesas:</u><br>
+                            {% for ementas5 in dadosSobremesas %}
+
+                            {%if data.Consumo.codigoconsumo == ementas5.ConsumoItems.codigoconsumo and ementas5.ConsumoItems.estado==0 %}
+                            {{ementas5.Items.designacao}}
+                            x{{ementas5.ConsumoItems.quantidade}};
+
+                            {%endif%}
+                            {%endfor%}
+                            <br>
+                        </p>
+                    </div>
+                </div>
+                {%endfor%}
+                <div style="width: 18rem; margin: 15px;">
+                    <a href="/funcionarios"><button class="btn btn-secondary" style="float: left; width: 100%; height: 100%;">
+                            <div><i class="fas fa-arrow-left" style="font-size: 60px;"></i></div>
+                            <div style="font-size: 40px;">Voltar</div>
+                        </button></a>
+                </div>
+            </div>
+        </center>
+</body>
+
+</html>

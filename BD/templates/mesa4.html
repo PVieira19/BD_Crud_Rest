@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+
+</head>
+
+
+
+
+<body style="background-color: rgb(220, 220, 220);">
+
+  <center>
+    <h1 style="margin-top: 3%; margin-bottom: 5%;">Cadeia Restaurantes R&R</h1>
+  </center>
+
+  <div class="row" style="height: 100%;">
+
+
+    <div class="col-lg-8 col-md-8 col-ls-12" style="margin-bottom: 3%; overflow: auto;">
+      <table class="table table-striped" style="width: 95%; margin-left: 5%; overflow: auto;"id="tabela" name="tabela">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Designação</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Remover</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {% for consumo in dadostabela %}
+
+          {% if consumo.estado == 1 %}
+          <tr>
+            <td>{{consumo.codigoconsumo}}</td>
+            <td>{{consumo.designacao}}</td>
+            <td>{{consumo.custo}}</td>
+            <td>
+              {{consumo.quantidade}}
+
+                <a href="/menosmesa4/{{consumo.codigoitems}}/{{consumo.quantidade}}/{{consumo.codigoconsumo}}"><input id="minus" type="button" style="background-color:red; border-radius: 25%;" class="minus" value="-"></a>
+                <a href="/maismesa4/{{consumo.codigoitems}}/{{consumo.quantidade}}/{{consumo.codigoconsumo}}"><input id="plus" type="button" style="background-color:greenyellow; border-radius: 25%;" class="plus" value="+"></a>
+
+            </td>
+            <td><a href="/eliminaritemmesa4/{{consumo.codigoitems}}/{{consumo.codigoconsumo}}"
+                onclick="return confirm('Are You Sure For Delete?')" class="far fa-trash-alt"></a></td>
+          </tr>
+
+          <form method="post" action="/terminarmesa4/{{consumo.codigoconsumo}}">
+
+
+            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem a Certeza que é para terminar o Consumo?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+           
+           
+                      <label>Nome:</label>
+    
+                      <input type="text" class="form-control" name="Escolha_Nome" value="Nome">
+    
+    
+                   </div>
+    
+    
+    
+                   <div class="form-group">
+    
+    
+                      <label>NIF:</label>
+    
+                      <input type="text" class="form-control" name="Escolha_NIF" value="999999999">
+    
+    
+                   </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Terminar Consumo</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        
+          {%else%}
+          {%endif%}
+          {%endfor%}
+
+        </tbody>
+      </table>
+      <span style="margin-left: 87%; overflow: auto;" id="tabelafinal"></span>
+
+    </div>
+
+    <div class="col-lg-3 col-md-3 col-ls-12">
+      <div style="height: 150px;">
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal"
+          style="float: left; width: 100%; height: 100%;">
+          <div><i class="fas fa-plus" style="font-size: 60px;"></i></div>
+          <div style="font-size: 40px;">Novo</div>
+        </button>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <form method="post" action="/adicionarmesa4/{{4}}">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Consumo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+
+                <input style="display: none;" id="local2" name="local2" value="0"></input>
+
+
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Entradas</label>
+                </div>
+                <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+                  id="Escolha_Entradas1" name="Escolha_Entradas1" style="width: 70%;">
+
+                  {% for Entradas in dadosEntradas%}
+                  <option value="{{Entradas.designacao}}">{{Entradas.designacao}}</option>
+                  {%endfor%}
+                </select>
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Prato de Carne:</label>
+                </div> <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+                  id="Escolha_Carne1" name="Escolha_Carne1" style="width: 70%;">
+
+                  {% for carne in dadosCarne%}
+                  <option value="{{carne.designacao}}">{{carne.designacao}}</option>
+                  {%endfor%}
+                </select>
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Prato de Peixe:</label>
+                </div>
+                <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+                  id="Escolha_Peixe1" name="Escolha_Peixe1" style="width: 70%;">
+
+                  {% for peixe in dadosPeixes%}
+                  <option value="{{peixe.designacao}}">{{peixe.designacao}}</option>
+                  {%endfor%}
+                </select>
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Bebidas</label>
+                </div>
+                <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+                  id="Escolha_Bebida1" name="Escolha_Bebida1" style="width: 70%;">
+                  {% for bebidas in dadosBebidas%}
+                  <option name="{{bebidas.designacao}}" value="{{bebidas.designacao}}">{{bebidas.designacao}}</option>
+                  {%endfor%}
+                </select>
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">Sobremesas:</label>
+                </div>
+
+                <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+                  id="Escolha_Sobremesa1" name="Escolha_Sobremesa1" style="width: 70%;">
+
+                  {% for sobremesa in dadosSobremesa%}
+                  <option value="{{sobremesa.designacao}}">{{sobremesa.designacao}}</option>
+                  {%endfor%}
+                </select>
+
+
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <br>
+
+  <div style="height: 150px;">
+    <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal2"
+      style="float: left; width: 100%; height: 100%;">
+      <div><i class="fas fa-plus" style="font-size: 60px;"></i></div>
+      <div style="font-size: 40px;">Adicionar</div>
+    </button>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <form method="post" action="/contadicionarmesa4">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Adicionar Consumo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+
+            <input style="display: none;" id="local2" name="local2" value="0"></input>
+
+
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Entradas</label>
+            </div>
+            <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+              id="Escolha_Entradas" name="Escolha_Entradas" style="width: 70%;">
+
+              {% for Entradas in dadosEntradas2%}
+              <option value="{{Entradas.designacao}}">{{Entradas.designacao}}</option>
+              {%endfor%}
+            </select>
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Prato de Carne:</label>
+            </div> <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+              id="Escolha_Carne" name="Escolha_Carne" style="width: 70%;">
+
+              {% for carne in dadosCarne2%}
+              <option value="{{carne.designacao}}">{{carne.designacao}}</option>
+              {%endfor%}
+            </select>
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Prato de Peixe:</label>
+            </div>
+            <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+              id="Escolha_Peixe" name="Escolha_Peixe" style="width: 70%;">
+
+              {% for peixe in dadosPeixes2%}
+              <option value="{{peixe.designacao}}">{{peixe.designacao}}</option>
+              {%endfor%}
+            </select>
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Bebidas</label>
+            </div>
+            <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+              id="Escolha_Bebida" name="Escolha_Bebida" style="width: 70%;">
+              {% for bebidas in dadosBebidas2%}
+              <option name="{{bebidas.designacao}}" value="{{bebidas.designacao}}">{{bebidas.designacao}}</option>
+              {%endfor%}
+            </select>
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Sobremesas:</label>
+            </div>
+
+            <select class="js-example-basic-multiple" multiple="multiple" multiple data-live-search="true"
+              id="Escolha_Sobremesa" name="Escolha_Sobremesa" style="width: 70%;">
+
+              {% for sobremesa in dadosSobremesa2%}
+              <option value="{{sobremesa.designacao}}">{{sobremesa.designacao}}</option>
+              {%endfor%}
+            </select>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+
+  <br><br>
+  <div style="height: 150px;">
+    <button type="button" class="btn btn-info " data-toggle="modal" data-target="#exampleModal1"
+      style="float: left; width: 100%; height: 100%;">
+      <div><i class="fas fa-check" style="font-size: 60px;"></i></div>
+      <div style="font-size: 40px;">Terminar</div>
+    </button></a>
+  </div>
+
+  <br><br>
+  <div style="height: 150px;">
+    <a href="/mesa"><button class="btn btn-secondary" style="float: left; width: 100%; height: 100%;">
+        <div><i class="fas fa-arrow-left" style="font-size: 60px;"></i></div>
+        <div style="font-size: 40px;">Voltar</div>
+      </button></a>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  $(document).ready(function () {
+    $('.js-example-basic-multiple').select2();
+
+  });
+
+  $(document).ready(function () {
+    $('.js-example-basic-single').select2();
+
+  });
+</script>
+
+<script>
+  function funcao() {
+
+    var restaurante = document.getElementById('local').value;
+    document.getElementById("local2").value = restaurante;
+
+  }
+
+</script>
+
+<script>
+    var restaurante = document.getElementById('local').value;
+
+
+    var input = document.getElementById('theInput');
+    document.getElementById('plus').onclick = function(){
+        input.value = parseInt(input.value, 10) +1
+    }
+    document.getElementById('minus').onclick = function(){
+        input.value = parseInt(input.value, 10) -1
+    }
+    </script>
+
+<style>
+
+</style>
+
+<script>
+  var table = document.getElementById("tabela"),sumVal=0
+  console.log(quantidade);
+
+  for(var i=1;i<table.rows.length;i++)
+  {
+    var quantidade = parseInt(table.rows[i].cells[3].innerHTML);
+    sumVal = sumVal +(quantidade * parseFloat(table.rows[i].cells[2].innerHTML));
+    console.log(quantidade);
+  }
+  document.getElementById("tabelafinal").innerHTML = "Valor Total: "+sumVal + "€";
+  </script>
+
+  

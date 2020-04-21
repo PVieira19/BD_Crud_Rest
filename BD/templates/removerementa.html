@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+
+</head>
+
+<body style="background-color: rgb(220, 220, 220);">
+    <center>
+        <h1 style="margin-top: 3%; margin-bottom: 5%;">Cadeia Restaurantes R&R</h1>
+
+        <div class="row">
+            {% for data in dados %}
+
+            <div class="card" style="width: 18rem; margin: 15px;">
+                <div class="card-body">
+                    <h5 class="card-title">Dia: {{data.data}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Prato {{data.designacao}}
+                    </h6>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        {%if data.codigotiporef == 1%}
+                        Refeição: Almoço
+                        {%else%}
+                        Refeição: Jantar
+                        {%endif%}
+                    </h6>
+                    <p class="card-text">
+                        <u>Entradas:</u>
+
+                        {% for ementas1 in dadosEntradas %}
+
+                        {%if data.data == ementas1.Ementas.data and data.codigotiporef == ementas1.Ementas.codigotiporef %}
+                        {{ementas1.Items.designacao}};
+
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                        <u>Prato de Carne:</u>
+                        {% for ementas2 in dadosCarne %}
+
+                        {%if data.data == ementas2.Ementas.data and data.codigotiporef == ementas2.Ementas.codigotiporef%}
+                        {{ementas2.Items.designacao}};
+
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                        <u>Prato de Peixe:</u>
+                        {% for ementas3 in dadosPeixes %}
+
+                        {%if data.data == ementas3.Ementas.data and data.codigotiporef == ementas3.Ementas.codigotiporef%}
+                        {{ementas3.Items.designacao}};
+
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                        <u>Bebidas:</u>
+                        {% for ementas4 in dadosBebidas %}
+
+                        {%if data.data == ementas4.Ementas.data and data.codigotiporef == ementas4.Ementas.codigotiporef%}
+                        {{ementas4.Items.designacao}};
+
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                        <u>Sobremesas:</u>
+                        {% for ementas5 in dadosSobremesa %}
+
+                        {%if data.data == ementas5.Ementas.data and data.codigotiporef == ementas5.Ementas.codigotiporef%}
+                        {{ementas5.Items.designacao}};
+
+                        {%endif%}
+                        {%endfor%}
+                        <br>
+                    </p>
+                    <a href="/eliminarementa/{{data.codigoementa}}" onclick="return confirm('Are You Sure For Delete?')" class="btn btn-info"> Eliminar</a>
+                </div>
+            </div>
+            
+            {%endfor%}
+            <div style="width: 18rem; margin: 15px;">
+                <a href="/ementa"><button class="btn btn-secondary" style="float: left; width: 100%; height: 100%;">
+                    <div><i class="fas fa-arrow-left" style="font-size: 60px;"></i></div>
+                    <div style="font-size: 40px;">Voltar</div>
+                </button></a>
+            </div>
+        </div>
+    </center>
+</body>
+
+</html>
+
+
+
+

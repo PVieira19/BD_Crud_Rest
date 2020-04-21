@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/6f46e29787.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+
+</head>
+<body style="background-color: rgb(220, 220, 220);"> 
+
+    <select onchange="funcao()" class="js-example-basic-single" id="localidade" name="localidade" style="width: 70%;">
+        <option> </option>
+        {% for restaurantes in dadosRestaurantes%}
+  
+        <option value="{{restaurantes.codigoloc}}">{{restaurantes.designacao}}</option>
+        {%endfor%}
+  
+      </select>
+
+
+
+<center><h1 style="margin-top: 3%; margin-bottom: 5%;">Cadeia Restaurantes R&R</h1></center>
+
+
+<form method="post" action="/">
+<div class="row" style="margin: 5%;">
+ <div class="col-lg-3 col-md-6 col-ls-12" style="margin-bottom: 3%; height: 220px; overflow: auto;">
+    <a href="/ementa"><button class="btn btn-info" style="float: left; width: 100%; height: 100%;">
+        <div><i class="fas fa-utensils" style="font-size: 60px;"></i></div> 
+        <div style="font-size: 40px;">Ementas</div>
+    </button type="submit"> </a>
+</div> 
+</div>
+
+</form>
+
+</body>
+</html>
